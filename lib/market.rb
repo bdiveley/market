@@ -36,8 +36,9 @@ class Market
     new_hash = Hash.new(0)
     @vendors.reduce(new_hash) do |hash, vendor|
       vendor.inventory.map do |key, value|
-        hash[key] += value
+        new_hash[key] += value
       end
     end
+    new_hash
   end
 end
