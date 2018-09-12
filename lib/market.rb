@@ -50,6 +50,7 @@ class Market
     if found == nil || found[1] < amount
       false
     else
+      found[1] -= amount
       true
     end
   end
