@@ -31,4 +31,13 @@ class Market
     end
     list.flatten.sort.uniq
   end
+
+  def total_inventory
+    new_hash = Hash.new(0)
+    @vendors.reduce(new_hash) do |hash, vendor|
+      vendor.inventory.map do |key, value|
+        hash[key] += value
+      end
+    end
+  end
 end

@@ -52,4 +52,5 @@ class VendorTest < Minitest::Test
 
     assert_equal( {"Peaches"=>55, "Tomatoes"=>12}, vendor.inventory)
   end
+
 end
