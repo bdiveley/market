@@ -18,11 +18,14 @@ class Vendor
   end
 
   def stock(item, amount)
-    @inventory.sum do |key, value|
-      inventory[key] += amount
+    found = @inventory.find do |key, value|
+        key == item
+      end
+    if found != nil
+      @inventory[found[0]] += amount
+    else
+      @inventory[item] = amount
     end
-
-    @inventory[item] = amount
   end
 
 

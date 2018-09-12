@@ -45,12 +45,11 @@ class VendorTest < Minitest::Test
   end
 
   def test_it_can_return_all_of_items_inventory
-    skip
     vendor = Vendor.new("Rocky Mountain Fresh")
     vendor.stock("Peaches", 30)
     vendor.stock("Peaches", 25)
     vendor.stock("Tomatoes", 12)
 
-    assert_equal {{"Peaches"=>55, "Tomatoes"=>12}}, vendor.inventory
+    assert_equal( {"Peaches"=>55, "Tomatoes"=>12}, vendor.inventory)
   end
 end
