@@ -12,6 +12,16 @@ class Market
   end
 
   def vendor_names
+    @vendors.map do |vendor|
+      vendor.name
+    end
+  end
 
+  def vendors_that_sell(item)
+    @vendors.find_all do |vendor|
+      vendor.inventory.find do |key, value|
+        key == item
+      end
+    end
   end
 end

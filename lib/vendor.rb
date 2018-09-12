@@ -11,7 +11,7 @@ class Vendor
     if @inventory.length == 0
       0
     else
-      found = @inventory.find do |key, value|
+      @inventory.find do |key, value|
         key == item
       end.last
     end
