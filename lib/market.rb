@@ -41,4 +41,16 @@ class Market
     end
     new_hash
   end
+
+  def sell(item, amount)
+    total = total_inventory
+    found = total.find do |key, value|
+      key == item
+      end
+    if found == nil || found[1] < amount
+      false
+    else
+      true
+    end
+  end
 end

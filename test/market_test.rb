@@ -125,4 +125,58 @@ class MarketTest < Minitest::Test
 
     assert_equal( {"Peaches"=>100, "Tomatoes"=>7, "Banana Nice Cream"=>50, "Peach-Raspberry Nice Cream"=>25}, market.total_inventory)
   end
+
+  def test_it_cannot_sell_more_products_than_available
+    market = Market.new("South Pearl Street Farmers Market")
+    vendor_1 = Vendor.new("Rocky Mountain Fresh")
+    vendor_1.stock("Peaches", 35)
+    vendor_1.stock("Tomatoes", 7)
+    vendor_2 = Vendor.new("Ba-Nom-a-Nom")
+    vendor_2.stock("Banana Nice Cream", 50)
+    vendor_2.stock("Peach-Raspberry Nice Cream", 25)
+    vendor_3 = Vendor.new("Palisade Peach Shack")
+    vendor_3.stock("Peaches", 65)
+    market.add_vendor(vendor_1)
+    market.add_vendor(vendor_2)
+    market.add_vendor(vendor_3)
+    market.sell("Peaches", 200)
+
+    refute market.sell("Peaches", 200)
+  end
+
+  def test_it_cannot_sell_a_product_if_it_doesnt_exist
+    market = Market.new("South Pearl Street Farmers Market")
+    vendor_1 = Vendor.new("Rocky Mountain Fresh")
+    vendor_1.stock("Peaches", 35)
+    vendor_1.stock("Tomatoes", 7)
+    vendor_2 = Vendor.new("Ba-Nom-a-Nom")
+    vendor_2.stock("Banana Nice Cream", 50)
+    vendor_2.stock("Peach-Raspberry Nice Cream", 25)
+    vendor_3 = Vendor.new("Palisade Peach Shack")
+    vendor_3.stock("Peaches", 65)
+    market.add_vendor(vendor_1)
+    market.add_vendor(vendor_2)
+    market.add_vendor(vendor_3)
+    market.sell("Peaches", 200)
+
+    refute market.sell("Onions", 1)
+  end
+
+  def test_it_can_sell_amts_of_available_product
+    market = Market.new("South Pearl Street Farmers Market")
+    vendor_1 = Vendor.new("Rocky Mountain Fresh")
+    vendor_1.stock("Peaches", 35)
+    vendor_1.stock("Tomatoes", 7)
+    vendor_2 = Vendor.new("Ba-Nom-a-Nom")
+    vendor_2.stock("Banana Nice Cream", 50)
+    vendor_2.stock("Peach-Raspberry Nice Cream", 25)
+    vendor_3 = Vendor.new("Palisade Peach Shack")
+    vendor_3.stock("Peaches", 65)
+    market.add_vendor(vendor_1)
+    market.add_vendor(vendor_2)
+    market.add_vendor(vendor_3)
+    market.sell("Peaches", 200)
+
+    assert market.sell("Banana Nice Cream", 5)
+  end
 end
